@@ -5982,7 +5982,7 @@
           }
         }
       },
-      "post": {
+      "delete": {
         "tags": [
           "mcp_projects"
         ],
@@ -6017,7 +6017,7 @@
           }
         }
       },
-      "delete": {
+      "post": {
         "tags": [
           "mcp_projects"
         ],
@@ -6089,7 +6089,7 @@
           }
         }
       },
-      "post": {
+      "delete": {
         "tags": [
           "mcp_projects"
         ],
@@ -6124,7 +6124,7 @@
           }
         }
       },
-      "delete": {
+      "post": {
         "tags": [
           "mcp_projects"
         ],
@@ -13579,7 +13579,7 @@
         "title": "UploadFileResponse",
         "description": "Upload file response schema."
       },
-      "langflow__schema__content_types__CodeContent": {
+      "langflow__schema__content_types__TextContent": {
         "additionalProperties": true,
         "type": "object"
       },
@@ -13745,6 +13745,10 @@
         "title": "ContentBlock",
         "description": "A block of content that can contain different types of content."
       },
+      "lfx__schema__content_types__CodeContent": {
+        "additionalProperties": true,
+        "type": "object"
+      },
       "lfx__schema__content_types__ErrorContent": {
         "additionalProperties": true,
         "type": "object"
@@ -13754,10 +13758,6 @@
         "type": "object"
       },
       "lfx__schema__content_types__MediaContent": {
-        "additionalProperties": true,
-        "type": "object"
-      },
-      "lfx__schema__content_types__TextContent": {
         "additionalProperties": true,
         "type": "object"
       },
