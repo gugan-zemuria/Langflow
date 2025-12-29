@@ -1,6 +1,7 @@
 import "@xyflow/react/dist/style.css";
 import { Suspense, useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
+import { ChatWidget } from "./components/CustomWidget/ChatWidget";
 import { LoadingPage } from "./pages/LoadingPage";
 import router from "./routes";
 import { useDarkStore } from "./stores/darkStore";
@@ -17,6 +18,7 @@ export default function App() {
   return (
     <Suspense fallback={<LoadingPage />}>
       <RouterProvider router={router} />
+      <ChatWidget /> {/* Injected globally */}
     </Suspense>
   );
 }

@@ -155,7 +155,8 @@ export const ForwardedIconComponent = memo(
       const componentProps = { ...baseProps, ref };
 
       const content = isValidComponent ? (
-        <TargetIcon {...componentProps} isDark={isDark} />
+        // Only pass isDark to custom icons that support it, not to standard lucide icons
+        <TargetIcon {...componentProps} />
       ) : (
         <div {...baseProps}>{TargetIcon}</div>
       );
