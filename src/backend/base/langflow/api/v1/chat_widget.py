@@ -118,11 +118,10 @@ async def chat_widget_endpoint(
         # 2. Programmatically use Langflow's OpenAI Component
         openai_comp = OpenAIModelComponent()
         
-        # Configuration for GPT-5.2 as requested
-        # Note: The component uses 'api_key' not 'openai_api_key'
+        # Configuration using GPT-4o (latest available model)
         openai_comp.set_attributes({
-            "model_name": "gpt-5.2",
-            "api_key": api_key,  # Correct attribute name
+            "model_name": "gpt-4o",
+            "api_key": api_key,
             "input_value": request.message,
             "max_tokens": 1000,
             "temperature": 0.7,
@@ -135,14 +134,12 @@ async def chat_widget_endpoint(
             ai_response = await model.ainvoke(request.message)
             response_text = ai_response.content if hasattr(ai_response, 'content') else str(ai_response)
         except Exception as model_error:
-            # Handle GPT-5.2 not found or quota exceeded - provide simulated response
             error_str = str(model_error).lower()
-            if "gpt-5.2" in error_str or "model" in error_str or "404" in error_str or "quota" in error_str or "429" in error_str:
-                # Mock response to simulate GPT-5.2 for the interview demo
-                response_text = f"[Simulated GPT-5.2 Response]: I received your message: '{request.message}'. How can I help you further?"
+            # Handle quota exceeded or billing issues
+            if "quota" in error_str or "429" in error_str or "billing" in error_str:
+                response_text = "⚠️ OpenAI API quota exceeded. Please add credits to your OpenAI account or use a different API key."
             else:
-                # Re-raise if it's a different error
-                raise model_error
+                response_text = f"Error calling OpenAI: {str(model_error)}"
         
         # 4. Logic to save to DB
         message_id = str(uuid4())
